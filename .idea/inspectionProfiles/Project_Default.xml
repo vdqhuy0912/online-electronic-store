@@ -1,0 +1,29 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="13">
+            <item index="0" class="java.lang.String" itemvalue="PyAutoGUI" />
+            <item index="1" class="java.lang.String" itemvalue="pygame" />
+            <item index="2" class="java.lang.String" itemvalue="pyperclip" />
+            <item index="3" class="java.lang.String" itemvalue="customtkinter" />
+            <item index="4" class="java.lang.String" itemvalue="pytweening" />
+            <item index="5" class="java.lang.String" itemvalue="PyMsgBox" />
+            <item index="6" class="java.lang.String" itemvalue="darkdetect" />
+            <item index="7" class="java.lang.String" itemvalue="MouseInfo" />
+            <item index="8" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="9" class="java.lang.String" itemvalue="pygame-menu" />
+            <item index="10" class="java.lang.String" itemvalue="PyGetWindow" />
+            <item index="11" class="java.lang.String" itemvalue="PyRect" />
+            <item index="12" class="java.lang.String" itemvalue="PyScreeze" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="ShellCheck" enabled="true" level="ERROR" enabled_by_default="true">
+      <shellcheck_settings value="SC2086" />
+    </inspection_tool>
+  </profile>
+</component>
