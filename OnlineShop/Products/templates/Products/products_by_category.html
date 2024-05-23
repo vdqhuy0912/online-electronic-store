@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ category.title }} - купити на RvShop
+{% endblock %}
+
+{% block content %}
+
+    {% for product in products %}
+        <div class="col-md-3">
+            <a href="{{ product.get_absolute_url }}" class="product-link">
+                <div class="product">
+                    <div class="image">
+                        <img src="{{ product.img.url }}" alt="">
+                    </div>
+
+                    <div class="info">
+
+                        <div class="product-name" style="width: 306px; height: 50.4px">
+                            <h4>{{ product.name|truncatewords:7 }}</h4>
+                        </div>
+
+
+                        <div class="info-price">
+                            {% if product.discount_availability %}
+
+                                <span class="discount">-{{ product.discount }}%</span>
+                                <span class="price"
+                                      style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+
+                            {% else %}
+                                <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                            {% endif %}
+                            <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
+                                    src="{% static 'icon/icons8-shopping-cart-24.png' %}"
+                                    alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block sort %}
+    <form action="" method="post" style="width: 20%">
+        {% csrf_token %}
+        {{ sort_form }}
+
+        <button type="submit" class="btn btn-dark btn-block" style="margin-top: 10px">Apply</button>
+    </form>
+{% endblock %}

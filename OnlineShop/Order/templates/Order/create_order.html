@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Order{% endblock %}
+
+{% block content %}
+
+    <div class="card mb-3" style="width: 2050px;">
+        <h1 style="text-align: center; margin-top: 20px">Ordering</h1>
+        <br>
+        <hr style="height: 30px">
+        {% for item in cart %}
+            <div class="row g-0">
+                <div class="col-md-4">
+
+                    {% if item.product.img %}
+                        <img src="{{ item.product.img.url }}" class="img-fluid rounded-start" alt="..." width="300">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+
+                        {% if item.quantity > 1 %}
+                            <h5 class="card-title">{{ item.product.name }} - {{ item.quantity }} units.</h5>
+                        {% else %}
+                            <h5 class="card-title">{{ item.product.name }} - {{ item.quantity }} unit.</h5>
+                        {% endif %}
+                        <br>
+                        <h5 class="card-text">{{ item.total_price_view }} <small>UAH</small></h5>
+                        <h5 class="card-text">{{ item.total_price_usd_view }} <small>$</small></h5>
+                        <h6 class="card-text">Product article: {{ item.product.article }}</h6>
+                        <br>
+
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+
+
+        <form action="" method="post" style="margin-left: 6px; width: 50%">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            {#            <!-- Set up a container element for the button -->#}
+            {#            <div id="paypal-button-container"></div>#}
+            {##}
+            {#            <!-- Include the PayPal JavaScript SDK -->#}
+            {#            <script src="https://www.paypal.com/sdk/js?client-id=AYufIkrW6w6Fz7C8iXzMj1t5_qnPQezhToUtFC2hW7kS8bM80Rs02aBdZyF6gpmGtbWI_cpOoFAmuTl7&currency=USD"></script>#}
+            {##}
+            {#            <script>#}
+            {#                function getCookie(name) {#}
+            {#                    var cookieValue = null;#}
+            {#                    if (document.cookie && document.cookie !== '') {#}
+            {#                        var cookies = document.cookie.split(';');#}
+            {#                        for (var i = 0; i < cookies.length; i++) {#}
+            {#                            var cookie = cookies[i].trim();#}
+            {#                            if (cookie.substring(0, name.length + 1) === (name + '=')) {#}
+            {#                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
+            {#                                break;#}
+            {#                            }#}
+            {#                        }#}
+            {#                    }#}
+            {#                    return cookieValue;#}
+            {#                }#}
+            {##}
+            {#                var csrftoken = getCookie('csrftoken');#}
+            {##}
+            {##}
+            {#                function initPayPalButton() {#}
+            {#                    paypal.Buttons({#}
+            {#                        style: {#}
+            {#                            shape: 'rect',#}
+            {#                            color: 'gold',#}
+            {#                            layout: 'vertical',#}
+            {#                            label: 'paypal',#}
+            {##}
+            {#                        },#}
+            {#                        createOrder: function (data, actions) {#}
+            {#                            return actions.order.create({#}
+            {#                                purchase_units: [{#}
+            {#                                    "amount": {#}
+            {#                                        "currency_code": "GBP",#}
+            {#                                        "value": '{{ cart.get_total_price }}'#}
+            {#                                    }#}
+            {#                                }]#}
+            {#                            });#}
+            {#                        },#}
+            {#                        onApprove: function (data) {#}
+            {#                            var url = "{% url 'order_creation' %}"#}
+            {#                            return fetch(url, {#}
+            {#                                method: 'POST',#}
+            {#                                headers: {#}
+            {#                                    'content-type': 'application/json',#}
+            {#                                    'X-CSRFToken': csrftoken,#}
+            {#                                },#}
+            {#                                body: JSON.stringify({#}
+            {#                                    orderID: data.orderID#}
+            {#                                })#}
+            {#                            }).then(function () {#}
+            {#                                location.href = '{% url 'order_creation' %}';#}
+            {#                            })#}
+            {#                        },#}
+            {#                    }).render('#paypal-button-container');#}
+            {#                }#}
+            {##}
+            {#                initPayPalButton();#}
+            {##}
+            {#            </script>#}
+
+            <button type="submit" class="btn btn-primary btn-lg">Pay</button>
+            <br>
+
+
+        </form>
+        <hr>
+        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
+            <small>UAH</small>: {{ cart.get_total_price_for_template }} <small>UAH</small></h5>
+        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
+            <small>USD</small>: {{ cart.get_total_price_usd_for_template }} <small>$</small></h5>
+        <hr>
+
+
+    </div>
+
+{% endblock %}
