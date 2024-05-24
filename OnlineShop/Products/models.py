@@ -130,9 +130,6 @@ class Product(models.Model):
                                        default=0)
     product_memory = models.ForeignKey(ProductMemoryCategory, on_delete=models.CASCADE, null=True,
                                        verbose_name='Product memory size', related_name='product', blank=True)
-    product_version = models.ForeignKey(ProductVersionCategory, on_delete=models.CASCADE, null=True,
-                                        verbose_name='Product esim or global', related_name='product',
-                                        blank=True)
     product_color = models.ForeignKey(ProductColorCategory, on_delete=models.CASCADE, null=True,
                                       verbose_name='Product color', related_name='product', blank=True)
     editing = models.BooleanField(default=False,
@@ -286,26 +283,6 @@ class ProductMemoryChoice(models.Model):
         verbose_name_plural = "Memory choices"
 
 
-class ProductVersionChoice(models.Model):
-    """Model of available choice of product versions"""
-
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_index=True, verbose_name='Product',
-                                related_name='version_product')
-    subcategory = models.ForeignKey(ProductSubcategory, on_delete=models.CASCADE, db_index=True,
-                                    verbose_name='Product subcategory', null=True)
-    memory = models.ForeignKey(ProductMemoryCategory, on_delete=models.CASCADE, db_index=True,
-                               verbose_name="Memory", null=True, blank=True)
-    color = models.ForeignKey(ProductColorCategory, on_delete=models.CASCADE, db_index=True,
-                              verbose_name='Color', null=True, blank=True)
-    version = models.CharField(max_length=300, verbose_name='Version')
-    is_active = models.BooleanField(default=True, verbose_name='Is active?')
-
-    def __str__(self):
-        return f'Version: {self.memory}'
-
-    class Meta:
-        verbose_name = 'version choice'
-        verbose_name_plural = 'Versions choices'
 
 
 class ProductPhotos(models.Model):

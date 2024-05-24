@@ -1,7 +1,7 @@
 from django.db.models import Q
 from Products.models import Product
 from .forms import OrderingChoicesForm
-from .models import ProductColorChoice, ProductMemoryChoice, ProductVersionChoice
+from .models import ProductColorChoice, ProductMemoryChoice
 
 
 class SearchMixin:
