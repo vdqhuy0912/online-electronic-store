@@ -3,7 +3,6 @@ venv
 *.pyc
 ABOUT CART CREATION
 *.ini
-migrations
 media
 *.env
 .vscode
