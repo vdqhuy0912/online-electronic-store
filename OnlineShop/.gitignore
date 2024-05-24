@@ -5,7 +5,6 @@ ABOUT CART CREATION
 *.ini
 migrations
 media
-RvShop img
 *.env
 .vscode
 __pycache__
