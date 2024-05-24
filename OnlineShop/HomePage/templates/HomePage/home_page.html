@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    RvShop 
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="recommend_prod">
+        {% for item in recommend_prod %}
+
+            <a href="{{ item.product_subcategory.get_absolute_url }}">
+                <img src="{{ item.photo.url }}" style="width: 1000px" class="d-block w-100" alt="...">
+            </a>
+
+        {% endfor %}
+    </div>
+
+
+    <script>
+        $('.recommend_prod').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            dots: true,
+        });
+    </script>
+
+
+    <br>
+
+
+    <h3 class="top-sell-title">Top sell:</h3>
+    <div class="top_sell">
+        {% for product in top_sell %}
+            <div class="col-md-3">
+                <a href="{{ product.get_absolute_url }}" class="product-link">
+                    <div class="product" style="margin-left: 10px; margin-right: 10px">
+                        <div class="image">
+                            <img src="{{ product.img.url }}" alt="">
+                        </div>
+
+                        <div class="info">
+
+                            <div class="product-name" style="width: 306px; height: 50.4px">
+                                <h4>{{ product.name|truncatewords:7 }}</h4>
+                            </div>
+
+
+                            <div class="info-price">
+                                {% if product.discount_availability %}
+
+                                    <span class="discount">-{{ product.discount }}%</span>
+                                    <span class="price"
+                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+
+                                {% else %}
+                                    <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                                {% endif %}
+                                <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
+                                        src="{% static 'icon/icons8-shopping-cart-24.png' %}"
+                                        alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $('.top_sell').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1
+        });
+    </script>
+
+
+    <h3 class="accessories-title">Accessories:</h3>
+    <div class="accessories">
+        {% for product in accessories %}
+            <div class="col-md-3">
+                <a href="{{ product.get_absolute_url }}" class="product-link">
+                    <div class="product" style="margin-left: 10px; margin-right: 10px">
+                        <div class="image">
+                            <img src="{{ product.img.url }}" alt="">
+                        </div>
+
+                        <div class="info">
+
+                            <div class="product-name" style="width: 306px; height: 50.4px">
+                                <h4>{{ product.name|truncatewords:7 }}</h4>
+                            </div>
+
+
+                            <div class="info-price">
+                                {% if product.discount_availability %}
+
+                                    <span class="discount">-{{ product.discount }}%</span>
+                                    <span class="price"
+                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>₴</small></span>
+
+                                {% else %}
+                                    <span class="price">{{ product.price_view }} <small>₴</small></span>
+                                {% endif %}
+                                <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
+                                        src="{% static 'icon/icons8-shopping-cart-24.png' %}"
+                                        alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $('.accessories').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1
+        });
+    </script>
+
+
+    <h3 class="gadgets-title">Gadgets:</h3>
+    <div class="gadgets">
+        {% for product in gadgets %}
+            <div class="col-md-3">
+                <a href="{{ product.get_absolute_url }}" class="product-link">
+                    <div class="product" style="margin-left: 10px; margin-right: 10px">
+                        <div class="image">
+                            <img src="{{ product.img.url }}" alt="">
+                        </div>
+
+                        <div class="info">
+
+                            <div class="product-name" style="width: 306px; height: 50.4px">
+                                <h4>{{ product.name|truncatewords:7 }}</h4>
+                            </div>
+
+
+                            <div class="info-price">
+                                {% if product.discount_availability %}
+
+                                    <span class="discount">-{{ product.discount }}%</span>
+                                    <span class="price"
+                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>₴</small></span>
+
+                                {% else %}
+                                    <span class="price">{{ product.price_view }} <small>₴</small></span>
+                                {% endif %}
+                                <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
+                                        src="{% static 'icon/icons8-shopping-cart-24.png' %}"
+                                        alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $('.gadgets').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1
+        });
+    </script>
+
+
+
+
+
+
+    {% for info in home_info %}
+        <div class="card mb-8" style="background-color: black; color: white">
+            <div class="card-body">
+                <p class="card-text">{{ info.title|safe }}</p>
+                <p class="card-text" style="margin-top: 40px">{{ info.text|safe }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

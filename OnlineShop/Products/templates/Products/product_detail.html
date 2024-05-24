@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+     {{ product.name }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="card mb-3" style="width: 2000px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {% if product.img %}
+                    <br>
+                    <br>
+                    <div class="product-photo-slider" style="width: 500px">
+                        {% for photo in photos %}
+                            <img src="{{ photo.photo.url }}" class="img-fluid rounded-start" alt="..."
+                                 style="margin-left: 5px">
+                        {% endfor %}
+                    </div>
+
+                    <script>
+                        $('.product-photo-slider').slick({
+                            dots: true,
+                            arrows: false,
+                            infinite: true,
+                            speed: 500,
+                            fade: true,
+                            cssEase: 'linear'
+                        });
+                    </script>
+
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-left: 100px">{{ product.name }}</h3>
+                    <br>
+                    {% if product.status == 'Have in shop' %}
+                        <h5 class="card-text"
+                            style="color: green; margin-left: 100px">{{ product.get_status_display }}</h5>
+                    {% elif product.status == 'Ends in shop' %}
+                        <h5 class="card-text"
+                            style="color: yellow; margin-left: 100px">{{ product.get_status_display }}</h5>
+                    {% else %}
+                        <h5 class="card-text"
+                            style="color: darkred; margin-left: 100px">{{ product.get_status_display }}</h5>
+                    {% endif %}
+
+                    <h6 class="card-text" style="margin-left: 100px">Product article: {{ product.article }}</h6>
+
+
+                    <br>
+                    {% if product.discount_availability %}
+                        <div class="d-flex justify-content-between">
+                            <strike><h6 class="card-text" style="margin-left: 100px">{{ product.get_price_view }}
+                                UAH</h6>
+                            </strike>
+                            <strike><h6 class="card-text" style="margin-left: -630px">
+                                <small>{{ product.get_price_in_usd_view }}
+                                </small><small>$</small></h6>
+                            </strike>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-text"
+                                style="color: red; margin-left: 100px">{{ product.get_price_with_discount_view }}
+                                UAH</h5>
+                            <h5 class="card-text"
+                                style="color: red; margin-right: 555px">
+                                <small>{{ product.get_price_in_usd_with_discount_view }}</small>
+                                <small>$</small></h5>
+
+                        </div>
+                        <br>
+                    {% else %}
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-text" style="margin-left: 100px">{{ product.get_price_view }} грн</h5>
+                            <h5 class="card-text" style="margin-right: 610px">
+                                <small>{{ product.get_price_in_usd_view }}</small> <small>$</small></h5>
+                        </div>
+
+                        <br>
+                    {% endif %}
+
+
+
+                    {% if product.product_memory %}
+                        <hr style="margin-left: 100px">
+
+                        <div class="d-flex">
+                            <h6 class="card-text" style="margin-left: 100px">Memory size:</h6>
+                        </div>
+
+                        <div class="d-flex" style="margin-left: 95px">
+
+                            {% for memory in memory %}
+                                <div class="choice">
+                                    <a href="{{ memory.product.get_absolute_url }}"
+                                       class="btn btn-light btn-block">{{ memory.memory }}</a>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+
+                        <hr style="margin-left: 100px">
+
+                    {% endif %}
+
+                    {% if product.product_version %}
+                        <hr style="margin-left: 100px">
+                        <div class="d-flex">
+                            <h6 class="card-text" style="margin-left: 100px">Version:</h6>
+                        </div>
+
+                        <div class="d-flex" style="margin-left: 95px">
+
+
+                            {% for version in version %}
+                                <div class="choice">
+                                    <a href="{{ version.product.get_absolute_url }}"
+                                       class="btn btn-light">{{ version.version }}</a>
+                                </div>
+
+                            {% endfor %}
+
+                            <br>
+                        </div>
+
+                        <hr style="margin-left: 100px">
+                    {% endif %}
+
+
+                    {% if product.product_color %}
+                        <hr style="margin-left: 100px">
+                        <h6 class="card-text" style="margin-left: 100px">Color:</h6>
+                        <div class="d-flex" style="margin-left: 95px">
+
+                            {% for color in color %}
+                                <div class="choice">
+                                    <a href="{{ color.product.get_absolute_url }}" class="btn"
+                                       style="background-color: {{ color.background_color }};
+                                               border-radius: 50%; width: 32px; height: 32px;">
+                                    </a>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                        <hr style="margin-left: 100px">
+                    {% endif %}
+
+
+                    <div class="rating" style="margin-left: 100px">
+                        {{ product.get_star|safe }}
+                        <br>
+                        Product rating: {{ product.total_rating }}
+                    </div>
+                    <br>
+                    {% if product.status == 'Have in shop' or product.status == 'Ends in shop' %}
+                        <a href="{% url 'cart_add' product.pk %}" class="btn btn-danger btn-block"
+                           style="margin-left: 100px">
+                            Add to cart
+                        </a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Recommended products:</h1>
+
+    <div class="recommended_items">
+        {% for product in recommended_products %}
+            <div class="col-md-3">
+                <a href="{{ product.get_absolute_url }}" class="product-link">
+                    <div class="product" style="margin-left: 10px; margin-right: 10px">
+                        <div class="image">
+                            <img src="{{ product.img.url }}" alt="">
+                        </div>
+
+                        <div class="info">
+
+                            <div class="product-name" style="width: 306px; height: 50.4px">
+                                <h4>{{ product.name|truncatewords:7 }}</h4>
+                            </div>
+
+
+                            <div class="info-price">
+                                {% if product.discount_availability %}
+
+                                    <span class="discount">-{{ product.discount }}%</span>
+                                    <span class="price"
+                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+
+                                {% else %}
+                                    <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                                {% endif %}
+
+                                <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
+                                        src="{% static 'icon/icons8-shopping-cart-24.png' %}"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $('.recommended_items').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1
+        });
+    </script>
+
+    <div class="card mb-8" style="width: 2000px;">
+        <div class="card-body">
+            <p class="card-text">{{ product.full_info|safe }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-8" style="width: 2000px;">
+        <div class="card-body">
+            <p class="card-text">{{ product.characteristics|safe }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-8" style="width: 2000px">
+        <div class="card-body">
+            <h2 class="card-text">Your opinion is important to us</h2>
+            <form action="" method="post">
+
+
+                {% csrf_token %}
+
+                {{ form.non_field.errors }}
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">Name: </label>
+                    <br>
+                    <br>
+                    {{ form.name }}
+                    <div class="invalid-feedback">
+                        {{ form.name.errors }}
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="{{ form.review.id_for_label }}">Review: </label>
+                    <br>
+                    <br>
+                    {{ form.review }}
+                    <div class="invalid-feedback">
+                        {{ form.review.errors }}
+                    </div>
+                </div>
+                <br>
+
+                <label>Your rating for the product: </label>
+                <br>
+                <div class="rate">
+                    <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10"
+                                                                                              title="5"></label>
+                    <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9" title="4.5"
+                                                                                               class="half"></label>
+                    <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8"
+                                                                                             title="4"></label>
+                    <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7"
+                                                                                               title="3.5"
+                                                                                               class="half"></label>
+                    <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6"
+                                                                                             title="3"></label>
+                    <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5"
+                                                                                               title="2.5"
+                                                                                               class="half"></label>
+                    <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4"
+                                                                                             title="2"></label>
+                    <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3"
+                                                                                               title="1.5"
+                                                                                               class="half"></label>
+                    <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2"
+                                                                                             title="1"></label>
+                    <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1"
+                                                                                               title="0.5"
+                                                                                               class="half"></label>
+                </div>
+                <br>
+                <br>
+
+                <button type="submit" class="btn btn-dark btn-block">Post review</button>
+
+            </form>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    {% for review in reviews %}
+        <div class="card mb-8" style="width: 2000px;">
+            <div class="card-body">
+                <div class="name-rating d-flex justify-content-between">
+                    <h3 class="comments">{{ review.name }}</h3>
+                    <div class="rating">
+                        {{ review.get_review_star|safe }}
+                    </div>
+                </div>
+                <h5 class="comment">{{ review.review }}</h5>
+
+
+                <br>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

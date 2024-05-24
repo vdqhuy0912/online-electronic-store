@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titlte %}
+    Registration
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" style="width: 35%">
+        {% csrf_token %}
+        <h1>Registration</h1>
+        {{ form.as_p }}
+
+        <div class="d-flex">
+            <button type="submit" class="btn btn-dark btn-block">Register</button>
+            <a href="{% url 'authentication' %}" style="margin-left: 20px; margin-top: 9px"><h4>Sign in</h4></a>
+        </div>
+
+
+    </form>
+{% endblock %}

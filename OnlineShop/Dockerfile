@@ -5,6 +5,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 WORKDIR /shop/app
 
-COPY requirements.txt /shop/requirements.txt
+COPY req.txt /shop/req.txt
 RUN pip install -r /shop/req.txt
 COPY . .
