@@ -4,6 +4,7 @@ venv
 ABOUT CART CREATION
 *.ini
 media
+migrations
 RvShop img
 *.env
 .vscode
