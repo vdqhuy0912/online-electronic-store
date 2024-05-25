@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Order payment{% endblock %}
+{% block title %}Thanh toán đơn hàng{% endblock %}
 
 {% block content %}
 
     <div class="card mb-3" style="width: 2000px;">
-        <h1 style="text-align: center; margin-top: 25px">Order payment</h1>
+        <h1 style="text-align: center; margin-top: 25px">Thanh toán đơn hàng</h1>
         <br>
         <hr style="height: 30px">
         {% for item in order_items %}
@@ -26,8 +26,7 @@
                         {% endif %}
 
                         <br>
-                        <h5 class="card-text">{{ item.get_total_price_view }} <small>UAH</small></h5>
-                        <h5 class="card-text">{{ item.get_total_price_usd_view }} <small>$</small></h5>
+                        <h5 class="card-text">{{ item.get_total_price_view }} <small>đ</small></h5>
 
                         <h6 class="card-text">Product article: {{ item.product.article }}</h6>
                         <br>
@@ -46,11 +45,8 @@
 
         <hr>
 
-        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
-            <small>UAH</small>: {{ order.get_order_total_price_view }} <small>UAH</small></h5>
-        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
-            <small>USD</small>: {{ order.get_order_total_price_usd_view }} <small>$</small></h5>
-        </form>
+        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Tổng giá trị đơn hàng: {{ order.get_order_total_price_view }} <small>đ</small></h5>
+
         <hr>
 
 

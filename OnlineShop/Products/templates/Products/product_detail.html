@@ -13,7 +13,7 @@
                 {% if product.img %}
                     <br>
                     <br>
-                    <div class="product-photo-slider" style="width: 500px">
+                    <div class="product-photo-slider" style="width=60%">
                         {% for photo in photos %}
                             <img src="{{ photo.photo.url }}" class="img-fluid rounded-start" alt="..."
                                  style="margin-left: 5px">
@@ -48,36 +48,24 @@
                             style="color: darkred; margin-left: 100px">{{ product.get_status_display }}</h5>
                     {% endif %}
 
-                    <h6 class="card-text" style="margin-left: 100px">Product article: {{ product.article }}</h6>
-
-
                     <br>
                     {% if product.discount_availability %}
-                        <div class="d-flex justify-content-between">
-                            <strike><h6 class="card-text" style="margin-left: 100px">{{ product.get_price_view }}
-                                UAH</h6>
-                            </strike>
-                            <strike><h6 class="card-text" style="margin-left: -630px">
-                                <small>{{ product.get_price_in_usd_view }}
-                                </small><small>$</small></h6>
-                            </strike>
-                        </div>
+
                         <div class="d-flex justify-content-between">
                             <h5 class="card-text"
                                 style="color: red; margin-left: 100px">{{ product.get_price_with_discount_view }}
-                                UAH</h5>
+                                đ</h5>
                             <h5 class="card-text"
-                                style="color: red; margin-right: 555px">
+                                style="color: red; margin-right: 30%">
                                 <small>{{ product.get_price_in_usd_with_discount_view }}</small>
-                                <small>$</small></h5>
+                                <small>đ</small></h5>
 
                         </div>
                         <br>
                     {% else %}
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-text" style="margin-left: 100px">{{ product.get_price_view }} грн</h5>
-                            <h5 class="card-text" style="margin-right: 610px">
-                                <small>{{ product.get_price_in_usd_view }}</small> <small>$</small></h5>
+                            <h5 class="card-text" style="margin-left: 100px">{{ product.get_price_view }} đ</h5>
+                            <h5 class="card-text" style="margin-right: 610px"></h5>
                         </div>
 
                         <br>
@@ -103,32 +91,10 @@
                             {% endfor %}
                         </div>
 
-                        <hr style="margin-left: 100px">
+
 
                     {% endif %}
 
-                    {% if product.product_version %}
-                        <hr style="margin-left: 100px">
-                        <div class="d-flex">
-                            <h6 class="card-text" style="margin-left: 100px">Version:</h6>
-                        </div>
-
-                        <div class="d-flex" style="margin-left: 95px">
-
-
-                            {% for version in version %}
-                                <div class="choice">
-                                    <a href="{{ version.product.get_absolute_url }}"
-                                       class="btn btn-light">{{ version.version }}</a>
-                                </div>
-
-                            {% endfor %}
-
-                            <br>
-                        </div>
-
-                        <hr style="margin-left: 100px">
-                    {% endif %}
 
 
                     {% if product.product_color %}
@@ -153,13 +119,13 @@
                     <div class="rating" style="margin-left: 100px">
                         {{ product.get_star|safe }}
                         <br>
-                        Product rating: {{ product.total_rating }}
+                        Rating: {{ product.total_rating }}
                     </div>
                     <br>
                     {% if product.status == 'Have in shop' or product.status == 'Ends in shop' %}
                         <a href="{% url 'cart_add' product.pk %}" class="btn btn-danger btn-block"
                            style="margin-left: 100px">
-                            Add to cart
+                            Thêm vào giỏ hàng
                         </a>
                     {% endif %}
 
@@ -169,7 +135,7 @@
         </div>
     </div>
 
-    <h1>Recommended products:</h1>
+    <h1>Đề xuất cho bạn:</h1>
 
     <div class="recommended_items">
         {% for product in recommended_products %}
@@ -192,10 +158,10 @@
 
                                     <span class="discount">-{{ product.discount }}%</span>
                                     <span class="price"
-                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>đ</small></span>
 
                                 {% else %}
-                                    <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                                    <span class="price">{{ product.get_price_view }} <small>đ</small></span>
                                 {% endif %}
 
                                 <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
@@ -232,7 +198,7 @@
 
     <div class="card mb-8" style="width: 2000px">
         <div class="card-body">
-            <h2 class="card-text">Your opinion is important to us</h2>
+            <h2 class="card-text">Đánh giá & nhận xét:</h2>
             <form action="" method="post">
 
 
@@ -240,7 +206,7 @@
 
                 {{ form.non_field.errors }}
                 <div class="form-group">
-                    <label for="{{ form.name.id_for_label }}">Name: </label>
+                    <label for="{{ form.name.id_for_label }}">Tên của bạn: </label>
                     <br>
                     <br>
                     {{ form.name }}
@@ -251,7 +217,7 @@
                 <br>
 
                 <div class="form-group">
-                    <label for="{{ form.review.id_for_label }}">Review: </label>
+                    <label for="{{ form.review.id_for_label }}">Bình luận: </label>
                     <br>
                     <br>
                     {{ form.review }}
@@ -261,7 +227,7 @@
                 </div>
                 <br>
 
-                <label>Your rating for the product: </label>
+                <label>Đánh giá của bạn: </label>
                 <br>
                 <div class="rate">
                     <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10"
@@ -292,7 +258,7 @@
                 <br>
                 <br>
 
-                <button type="submit" class="btn btn-dark btn-block">Post review</button>
+                <button type="submit" class="btn btn-dark btn-block">Đăng nhận xét</button>
 
             </form>
             <br>

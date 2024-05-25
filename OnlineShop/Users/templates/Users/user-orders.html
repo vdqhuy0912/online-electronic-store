@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    My account
+    Tài khoản của tôi
 {% endblock %}
 
 {% block content %}
@@ -27,28 +27,25 @@
 
             <div class="col-md-4">
                 <div class="list-group list-group-flush" style="width: 80%">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        My cabinet
-                    </a>
+
                     <a href="#" class="list-group-item list-group-item-action">Coupons</a>
                     <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action active"
-                       aria-current="true">My orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Favorites</a>
-                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Personal
-                        information</a>
+                       aria-current="true">Đơn hàng của tôi</a>
+                    <a href="#" class="list-group-item list-group-item-action">Yêu thích</a>
+                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                 </div>
                 <a href="{% url 'logout' %}">
                     <img src="{% static 'icon/61208.png' %}" alt=""
                          style="width: 30px; margin-right: 5px; margin-left: 250px">
-                    Logout
+                    Thoát
                 </a>
             </div>
 
             <div class="col-md-8 personal-info">
-                <h1 class="pers-info-title" style="margin-bottom: 50px">My orders</h1>
+                <h1 class="pers-info-title" style="margin-bottom: 50px">Đơn hàng của tôi</h1>
                 <div class="card-body">
                     <h3 class="card-title" style="margin-left: 100px">
-                        Orders
+                        Đơn hàng
                     </h3>
 
                     <div class="orders" style="margin-left: 100px; margin-top: 40px">
@@ -66,20 +63,15 @@
                                                style="color: yellow">{{ order.get_order_status_display }}</p>
                                         {% endif %}
                                         <p class="card-text"><h6>{{ order.get_order_total_price_view }}
-                                        <small>₴</small>
+                                        <small>đ</small>
                                     </h6></p>
-                                        <p class="card-text" style="margin-top: -10px">
-                                        <h6>{{ order.get_order_total_price_usd_view }}
-                                            <small>$</small>
-                                        </h6></p>
 
-                                        <a href="{% url 'user-order-detail' order.id %}" class="btn btn-dark">More
-                                            information</a>
+                                        <a href="{% url 'user-order-detail' order.id %}" class="btn btn-dark">Thêm thông tin</a>
                                     </div>
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <h6>You don't have orders</h6>
+                            <h6>Bạn hiện không có đơn hàng nào</h6>
                         {% endif %}
 
                     </div>

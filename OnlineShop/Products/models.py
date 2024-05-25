@@ -73,20 +73,6 @@ class ProductMemoryCategory(models.Model):
                 self.memory_size = f'{self.int_memory_value}GB'
         super(ProductMemoryCategory, self).save(*args, **kwargs)
 
-
-class ProductVersionCategory(models.Model):
-    """Category of product versions"""
-
-    title = models.CharField(max_length=250, verbose_name='Product version', blank=True)
-
-    def __str__(self):
-        return f'Version: {self.title}'
-
-    class Meta:
-        verbose_name = 'Product version category'
-        verbose_name_plural = 'Product versions categories'
-
-
 class ProductColorCategory(models.Model):
     """Category of products colors"""
 
@@ -134,8 +120,6 @@ class Product(models.Model):
                                       verbose_name='Product color', related_name='product', blank=True)
     editing = models.BooleanField(default=False,
                                   verbose_name='Dont touch this field, after saving it will be True.')
-    price_in_usd = models.IntegerField(verbose_name='Product price in dollars', default=0)
-    price_in_usd_with_discount = models.IntegerField(verbose_name='Product price in dollars with discount', default=0)
     bonuses = models.IntegerField(verbose_name='Bonuses for buying this product', default=0)
 
     def get_absolute_url(self):
@@ -161,14 +145,11 @@ class Product(models.Model):
         if self.discount_availability:
             """If we have discount"""
             self.price_with_discount = get_discount(self.price, self.discount)
-            self.price_in_usd = get_price_in_usd(self.price)
-            self.price_in_usd_with_discount = get_price_in_usd(self.price_with_discount)
+
 
         else:
             """If we dont have discount"""
             self.price_with_discount = self.price
-            self.price_in_usd = get_price_in_usd(self.price_with_discount)
-            self.price_in_usd_with_discount = get_price_in_usd(self.price_in_usd)
 
         return super(Product, self).save(*args, **kwargs)
 
@@ -186,25 +167,12 @@ class Product(models.Model):
         price_view = get_price_sep(self.price)
         return price_view
 
-    def get_price_in_usd_view(self):
-        """Getting product price in dollars for template."""
-
-        price_in_usd_view = get_price_sep(self.price_in_usd)
-        return price_in_usd_view
 
     def get_price_with_discount_view(self):
         """Getting product price with discount for template."""
 
         price_with_discount_view = get_price_sep(self.price_with_discount)
         return price_with_discount_view
-
-    def get_price_in_usd_with_discount_view(self):
-        """
-        Getting product price in dollars
-        with discount for template.
-        """
-        price_in_usd_with_discount_view = get_price_sep(self.price_in_usd_with_discount)
-        return price_in_usd_with_discount_view
 
 
 class Reviews(models.Model):
@@ -245,8 +213,6 @@ class ProductColorChoice(models.Model):
     color = models.CharField(max_length=250, verbose_name='Color name at the choice button')
     memory = models.ForeignKey(ProductMemoryCategory, on_delete=models.CASCADE, db_index=True,
                                verbose_name='Product memory size', null=True, blank=True)
-    version = models.ForeignKey(ProductVersionCategory, on_delete=models.CASCADE, db_index=True,
-                                verbose_name='Product esim or global', null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name='Is active?')
     background_color = models.CharField(max_length=250, verbose_name='Button background color', blank=True)
 
@@ -268,11 +234,6 @@ class ProductMemoryChoice(models.Model):
     color = models.ForeignKey(ProductColorCategory, on_delete=models.CASCADE, db_index=True,
                               verbose_name='Product color', null=True, blank=True)
     memory = models.CharField(max_length=250, verbose_name='Memory at the choice button', blank=True)
-    version = models.ForeignKey(ProductVersionCategory,
-                                on_delete=models.CASCADE,
-                                db_index=True,
-                                verbose_name='Version',
-                                null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name='Is active?')
 
     def __str__(self):
@@ -281,9 +242,6 @@ class ProductMemoryChoice(models.Model):
     class Meta:
         verbose_name = "memory choice"
         verbose_name_plural = "Memory choices"
-
-
-
 
 class ProductPhotos(models.Model):
     """Model of product photos"""

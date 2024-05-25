@@ -34,7 +34,6 @@ def get_product_choices(**kwargs):
             ProductMemoryChoice.objects.get_or_create(product=instance,
                                                       subcategory=instance.subcategory,
                                                       color=instance.product_color,
-                                                      version=instance.product_version,
                                                       memory=instance.product_memory.memory_size
                                                       )
 
@@ -43,7 +42,6 @@ def get_product_choices(**kwargs):
                                                      subcategory=instance.subcategory,
                                                      color=instance.product_color.color,
                                                      memory=instance.product_memory,
-                                                     version=instance.product_version,
                                                      is_active=True,
                                                      background_color=instance.product_color.color_hex)
 

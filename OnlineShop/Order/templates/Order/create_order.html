@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="card mb-3" style="width: 2050px;">
-        <h1 style="text-align: center; margin-top: 20px">Ordering</h1>
+        <h1 style="text-align: center; margin-top: 20px">Đặt hàng</h1>
         <br>
         <hr style="height: 30px">
         {% for item in cart %}
@@ -19,16 +19,19 @@
                 <div class="col-md-8">
                     <div class="card-body">
 
-                        {% if item.quantity > 1 %}
-                            <h5 class="card-title">{{ item.product.name }} - {{ item.quantity }} units.</h5>
-                        {% else %}
-                            <h5 class="card-title">{{ item.product.name }} - {{ item.quantity }} unit.</h5>
-                        {% endif %}
+                        <h5 class="card-title">{{ item.product.name }} - {{ item.quantity }} sản phẩm.</h5>
                         <br>
-                        <h5 class="card-text">{{ item.total_price_view }} <small>UAH</small></h5>
-                        <h5 class="card-text">{{ item.total_price_usd_view }} <small>$</small></h5>
-                        <h6 class="card-text">Product article: {{ item.product.article }}</h6>
+                        <h5 class="card-text">{{ item.total_price_view }} <small>đ</small></h5>
                         <br>
+
+                        {% for memory in memory %}
+                            <div class="choice">
+                                <a href="{{ memory.product.get_absolute_url }}"
+                                   class="btn btn-light btn-block">{{ memory.memory }}</a>
+                            </div>
+
+                        {% endfor %}
+
 
 
                     </div>
@@ -43,12 +46,6 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-            {#            <!-- Set up a container element for the button -->#}
-            {#            <div id="paypal-button-container"></div>#}
-            {##}
-            {#            <!-- Include the PayPal JavaScript SDK -->#}
-            {#            <script src="https://www.paypal.com/sdk/js?client-id=AYufIkrW6w6Fz7C8iXzMj1t5_qnPQezhToUtFC2hW7kS8bM80Rs02aBdZyF6gpmGtbWI_cpOoFAmuTl7&currency=USD"></script>#}
-            {##}
             {#            <script>#}
             {#                function getCookie(name) {#}
             {#                    var cookieValue = null;#}
@@ -109,17 +106,15 @@
             {##}
             {#            </script>#}
 
-            <button type="submit" class="btn btn-primary btn-lg">Pay</button>
-            <br>
+
 
 
         </form>
         <hr>
-        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
-            <small>UAH</small>: {{ cart.get_total_price_for_template }} <small>UAH</small></h5>
-        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Total price in
-            <small>USD</small>: {{ cart.get_total_price_usd_for_template }} <small>$</small></h5>
-        <hr>
+        <h5 style="margin-left: 5px; margin-bottom: 5px; width: 700px">Tổng: {{ cart.get_total_price_for_template }} <small>đ</small></h5>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg">Thanh toán</button>
+            <br>
 
 
     </div>

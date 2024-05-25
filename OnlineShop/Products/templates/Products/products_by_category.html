@@ -27,10 +27,10 @@
 
                                 <span class="discount">-{{ product.discount }}%</span>
                                 <span class="price"
-                                      style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+                                      style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>đ</small></span>
 
                             {% else %}
-                                <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                                <span class="price">{{ product.get_price_view }} <small>đ</small></span>
                             {% endif %}
                             <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
                                     src="{% static 'icon/icons8-shopping-cart-24.png' %}"
@@ -49,6 +49,6 @@
         {% csrf_token %}
         {{ sort_form }}
 
-        <button type="submit" class="btn btn-dark btn-block" style="margin-top: 10px">Apply</button>
+        <button type="submit" class="btn btn-dark btn-block" style="margin-top: 10px">Áp dụng</button>
     </form>
 {% endblock %}

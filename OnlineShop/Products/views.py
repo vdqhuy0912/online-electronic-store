@@ -122,7 +122,7 @@ class ProductsDetailView(ProductRelatedChoicesMixin, DetailView):
 
     def get_queryset(self):
         return Product.objects.filter(pk=self.kwargs['pk']).select_related('main_category', 'subcategory',
-                                                                           'product_memory', 'product_version',
+                                                                           'product_memory',
                                                                            'product_color')
 
     def get_context_data(self, **kwargs):

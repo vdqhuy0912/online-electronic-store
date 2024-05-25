@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    My account
+    Tài khoản của tôi
 {% endblock %}
 
 {% block content %}
@@ -27,28 +27,24 @@
 
             <div class="col-md-4">
                 <div class="list-group list-group-flush" style="width: 80%">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        My cabinet
-                    </a>
-                    <a href="{% url 'user-coupons' %}" class="list-group-item list-group-item-action active"
-                       aria-current="true">Coupons</a>
-                    <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action">My orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Favorites</a>
-                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Personal
-                        information</a>
+                    <a href="#" class="list-group-item list-group-item-action">Kho vouchers</a>
+                    <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action active"
+                       aria-current="true">Giỏ hàng của tôi</a>
+                    <a href="#" class="list-group-item list-group-item-action">Yêu thích</a>
+                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                 </div>
                 <a href="{% url 'logout' %}">
                     <img src="{% static 'icon/61208.png' %}" alt=""
                          style="width: 30px; margin-right: 5px; margin-left: 250px">
-                    Logout
+                    Đăng xuất
                 </a>
             </div>
 
             <div class="col-md-8 personal-info">
-                <h1 class="pers-info-title" style="margin-bottom: 50px">My coupons</h1>
+                <h1 class="pers-info-title" style="margin-bottom: 50px">Kho voucher</h1>
                 <div class="card-body">
                     <h3 class="card-title" style="margin-left: 100px">
-                        Coupons
+                        Voucher
                     </h3>
 
                     <div class="orders" style="margin-left: 100px; margin-top: 40px">
@@ -59,18 +55,17 @@
                                     <div class="card-body">
                                         {% if coupon.is_active %}
                                             <h5 class="card-title">{{ coupon.valid_from|date:"d-m-Y" }}</h5>
-                                            <h5 class="card-title">Deactivation
-                                                date: {{ coupon.valid_to|date:"d-m-Y" }}</h5>
+                                            <h5 class="card-title">Hiệu lực đến: {{ coupon.valid_to|date:"d-m-Y" }}</h5>
                                             <p class="card-text"><h6>Discount: {{ coupon.discount }}</h6></p>
                                             <p class="card-text" style="margin-top: -10px">
                                         {% else %}
-                                            <h5 class="card-title">Coupon no longer active</h5>
+                                            <h5 class="card-title">Voucher đã hết hạn!</h5>
                                         {% endif %}
                                     </div>
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <h6>You don't have coupons</h6>
+                            <h6>Bạn không có voucher nào</h6>
                         {% endif %}
 
                     </div>

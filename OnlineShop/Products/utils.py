@@ -56,25 +56,17 @@ class ProductRelatedChoicesMixin:
     def get_related_choices(product):
         color = ProductColorChoice.objects.filter(subcategory=product.subcategory,
                                                   memory=product.product_memory,
-                                                  version=product.product_version,
                                                   is_active=True
                                                   ).select_related('product__main_category',
                                                                    'product__subcategory')
         memory = ProductMemoryChoice.objects.filter(subcategory=product.subcategory,
                                                     color=product.product_color,
-                                                    version=product.product_version,
                                                     is_active=True
                                                     ).select_related('product__main_category',
                                                                      'product__subcategory')
-        version = ProductVersionChoice.objects.filter(subcategory=product.subcategory,
-                                                      color=product.product_color,
-                                                      memory=product.product_memory,
-                                                      is_active=True).select_related('product__main_category',
-                                                                                     'product__subcategory')
 
         context = {
             'color': color,
             'memory': memory,
-            'version': version
         }
         return context

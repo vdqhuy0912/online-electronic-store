@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    RvShop 
+    ATOMPhone
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@
             </a>
 
         {% endfor %}
+
     </div>
 
 
@@ -34,7 +35,7 @@
     <br>
 
 
-    <h3 class="top-sell-title">Top sell:</h3>
+    <h3 class="top-sell-title">Giảm sâu:</h3>
     <div class="top_sell">
         {% for product in top_sell %}
             <div class="col-md-3">
@@ -56,10 +57,10 @@
 
                                     <span class="discount">-{{ product.discount }}%</span>
                                     <span class="price"
-                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>₴</small></span>
+                                          style="margin-left: 63px">{{ product.get_price_with_discount_view }} <small>đ</small></span>
 
                                 {% else %}
-                                    <span class="price">{{ product.get_price_view }} <small>₴</small></span>
+                                    <span class="price">{{ product.get_price_view }} <small>đ</small></span>
                                 {% endif %}
                                 <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
                                         src="{% static 'icon/icons8-shopping-cart-24.png' %}"
@@ -81,7 +82,7 @@
     </script>
 
 
-    <h3 class="accessories-title">Accessories:</h3>
+    <h3 class="accessories-title">Phụ kiện kèm theo:</h3>
     <div class="accessories">
         {% for product in accessories %}
             <div class="col-md-3">
@@ -103,10 +104,10 @@
 
                                     <span class="discount">-{{ product.discount }}%</span>
                                     <span class="price"
-                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>₴</small></span>
+                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>đ</small></span>
 
                                 {% else %}
-                                    <span class="price">{{ product.price_view }} <small>₴</small></span>
+                                    <span class="price">{{ product.price_view }} <small>đ</small></span>
                                 {% endif %}
                                 <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
                                         src="{% static 'icon/icons8-shopping-cart-24.png' %}"
@@ -128,7 +129,7 @@
     </script>
 
 
-    <h3 class="gadgets-title">Gadgets:</h3>
+    <h3 class="gadgets-title">Thiết bị:</h3>
     <div class="gadgets">
         {% for product in gadgets %}
             <div class="col-md-3">
@@ -150,10 +151,10 @@
 
                                     <span class="discount">-{{ product.discount }}%</span>
                                     <span class="price"
-                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>₴</small></span>
+                                          style="margin-left: 63px">{{ product.price_with_discount_view }} <small>đ</small></span>
 
                                 {% else %}
-                                    <span class="price">{{ product.price_view }} <small>₴</small></span>
+                                    <span class="price">{{ product.price_view }} <small>đ</small></span>
                                 {% endif %}
                                 <a href="{% url 'cart_add' product.pk %}" class="add-to-cart button"><img
                                         src="{% static 'icon/icons8-shopping-cart-24.png' %}"

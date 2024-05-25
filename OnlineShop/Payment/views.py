@@ -6,7 +6,7 @@ from Order.models import Order, OrderItem
 from django.conf import settings
 from Cart.cart import Cart
 from Order.tasks import order_created
-from Products.services import get_discount, get_price_in_usd
+from Products.services import get_discount
 from .utils import CSRFExemptMixin
 from Order.services import generate_code
 from .services import create_coupon
@@ -99,7 +99,6 @@ class PaymentProcess(CSRFExemptMixin, View):
 
                         order_total_price = order.order_total_price
                         order.order_total_price = get_discount(order_total_price, order.coupon.discount)
-                        order.order_total_price_usd = get_price_in_usd(order.order_total_price)
 
                 if order.use_bonuses:
                     usr_bonuses = self.request.user.bonuses_balance
@@ -107,7 +106,6 @@ class PaymentProcess(CSRFExemptMixin, View):
 
                     if usr_bonuses < order.order_total_price and usr_bonuses_usd < order.order_total_price_usd:
                         order.order_total_price -= usr_bonuses
-                        order.order_total_price_usd -= usr_bonuses_usd
                         self.request.user.bonuses_balance = 0
                         self.request.user.bonuses_balance_usd = 0
                         self.request.user.save()

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    My account
+    Tài khoản của tôi
 {% endblock %}
 
 {% block content %}
@@ -27,25 +27,21 @@
 
             <div class="col-md-4">
                 <div class="list-group list-group-flush" style="width: 80%">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        My cabinet
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">Coupons</a>
+                    <a href="#" class="list-group-item list-group-item-action">Kho vouchers</a>
                     <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action active"
-                       aria-current="true">My orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Favorites</a>
-                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Personal
-                        information</a>
+                       aria-current="true">Giỏ hàng của tôi</a>
+                    <a href="#" class="list-group-item list-group-item-action">Yêu thích</a>
+                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                 </div>
                 <a href="{% url 'logout' %}">
                     <img src="{% static 'icon/61208.png' %}" alt=""
                          style="width: 30px; margin-right: 5px; margin-left: 250px">
-                    Logout
+                    Đăng xuất
                 </a>
             </div>
 
             <div class="col-md-8 personal-info">
-                <h1 class="pers-info-title" style="margin-bottom: 50px">Order: № {{ order.id }}</h1>
+                <h1 class="pers-info-title" style="margin-bottom: 50px">Đơn hàng: № {{ order.id }}</h1>
                 <div class="card-body">
 
                     <div class="order" style="margin-left: 100px; margin-top: 40px">
@@ -64,8 +60,7 @@
 
                                 <p class="card-text">
                                 <h5>Order bonuses</h5>
-                                <h6>{{ order.order_bonuses }} ₴<small></small></h6>
-                                <h6>{{ order.order_bonuses_usd }} $<small></small></h6>
+                                <h6>{{ order.order_bonuses }} đ<small></small></h6>
                                 </p>
 
                                 <hr>
@@ -78,17 +73,8 @@
                                             </a>
                                             <a href="{{ item.product.get_absolute_url }}"><h5
                                                     class="card-title">{{ item.product.name }}</h5></a>
-                                            {% if item.quantity > 1 %}
-                                                <p class="card-text"><h6>{{ item.quantity }} units</h6></p>
-                                            {% else %}
-                                                <p class="card-text"><h6>{{ item.quantity }} unit</h6></p>
-                                            {% endif %}
-                                            <p class="card-text"><h6>{{ item.product.get_price_view }} <small>₴</small>
-                                        </h6></p>
-                                            <p class="card-text"><h6>{{ item.product.get_price_in_usd_view }}
-                                            <small>$</small>
-                                        </h6></p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <p class="card-text"><h6>{{ item.quantity }} sản phẩm</h6></p>
+                                            <p class="card-text"><h6>{{ item.product.get_price_view }} <small>đ</small>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -109,12 +95,9 @@
                                 <div class="total">
                                     <h2>Total:</h2>
                                     <p class="card-text"><h5>{{ order.get_order_total_price_view }}
-                                    <small>₴</small>
+                                    <small>đ</small>
                                 </h5></p>
-                                    <p class="card-text" style="margin-top: -10px">
-                                    <h5>{{ order.get_order_total_price_usd_view }}
-                                        <small>$</small>
-                                    </h5></p>
+
                                 </div>
 
 

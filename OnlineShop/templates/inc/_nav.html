@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home_page' %}">OnlineShop</a>
+        <a class="navbar-brand" href="{% url 'home_page' %}">ATOMPhone</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'all_products' %}">All products</a>
+                    <a class="nav-link" href="{% url 'all_products' %}">Tất cả sản phẩm</a>
                 </li>
                 {% get_product_category as categories %}
                 {% for category in categories %}
@@ -38,8 +38,8 @@
             </ul>
 
             <form action="{% url 'search' %}" class="d-flex" method="get">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-dark" type="submit">Search</button>
+                <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search" name="search">
+                <button class="btn btn-dark" type="submit">Tìm</button>
             </form>
 
             {% if request.user.is_authenticated %}
@@ -53,9 +53,9 @@
                 </div>
             {% else %}
                 <div class="d-flex" style="margin-left: 20px; margin-left: 20px">
-                    <a href="{% url 'authentication' %}" style="margin-right: 20px">Sign in</a>
+                    <a href="{% url 'authentication' %}" style="margin-right: 20px">Đăng nhập</a>
                     <div class="sign-up" style="border: 1px solid white; border-radius: 7px; padding: 2px">
-                        <a href="{% url 'registration' %}">Sign up</a>
+                        <a href="{% url 'registration' %}">Đăng kí</a>
                     </div>
                 </div>
             {% endif %}
