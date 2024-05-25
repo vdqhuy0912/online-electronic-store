@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'paypal.standard.ipn',
     'ckeditor',
-    'models2puml',
-    'django_extensions',
 
     # Applications
     'Products',
@@ -165,11 +163,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # GMAIL CONNECTION
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # write your password here
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'your_gmail'
+EMAIL_HOST_PASSWORD = 'your_password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # REDIS
 
@@ -277,8 +275,3 @@ PAYPAL_RECEIVER_EMAIL = str(os.getenv('PAYPAL_RECEIVER_EMAIL'))
 # }
 
 AUTH_USER_MODEL = 'Users.User'
-
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}

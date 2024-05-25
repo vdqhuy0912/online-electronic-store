@@ -61,12 +61,6 @@ class ProductMemoryCategoryAdmin(admin.ModelAdmin):
     exclude = ['memory_size']
 
 
-@admin.register(ProductVersionCategory)
-class ProductVersionCategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title']
-    list_display_links = ['id', 'title']
-    search_fields = ['id', 'title']
-
 
 @admin.register(ProductColorCategory)
 class ProductColorCategoryAdmin(admin.ModelAdmin):

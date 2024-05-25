@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block titlte %}
-    Registration
+    Đăng nhập
 {% endblock %}
 
 {% block content %}
     <form action="" method="post" style="width: 35%">
         {% csrf_token %}
-        <h1>Authentication</h1>
+        <h1>Thông tin đăng nhập</h1>
         {{ form.non_field.errors }}
         <p>
             <label for="id_username">Email:</label>
@@ -16,11 +16,11 @@
         </p>
 
         <p>
-            <label for="id_password">Password:</label>
+            <label for="id_password">Mật khẩu:</label>
             <input type="password" name="password" class="form-control" id="id_password">
             {{ form.password.errors }}
         </p>
-        <button type="submit" class="btn btn-dark btn-block">Authenticate</button>
+        <button type="submit" class="btn btn-dark btn-block">Đăng nhập</button>
 
     </form>
 {% endblock %}

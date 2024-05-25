@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from Products.models import Product
-from Products.services import get_price_sep, get_price_in_usd
+from Products.services import get_price_sep
 
 
 class Cart:
@@ -40,8 +40,8 @@ class Cart:
             # If product not in the cart, we adding it.
 
             self.cart[product_id] = {'quantity': 0,
-                                     'price': str(product.price_with_discount),
-                                     'price_usd': str(get_price_in_usd(product.price_in_usd_with_discount))}
+                                     'price': str(product.price_with_discount)
+                                     }
 
         self.cart[product_id]['quantity'] += 1  # every adding product to the cart its quantity increasing by 1
         self.save()
@@ -106,13 +106,8 @@ class Cart:
 
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
-            item['price_usd'] = Decimal(item['price_usd'])
-            item['total_price_usd'] = get_price_in_usd(float(item['total_price']))
             item['total_price_view'] = get_price_sep(item['total_price'])  # total price of product for template
-            item['total_price_usd_view'] = get_price_sep(
-                item['total_price_usd'])  # total price of product in usd for template
             item['price_view'] = get_price_sep(item['price'])  # product price for template
-            item['price_usd_view'] = get_price_sep(item['price_usd'])  # product price in usd for template
             yield item
 
     def __len__(self):
@@ -138,13 +133,7 @@ class Cart:
 
         return get_price_sep(self.get_total_price())
 
-    def get_total_price_usd(self):
-        total_price = float(self.get_total_price())
-        total_price_in_usd = get_price_in_usd(total_price)
-        return total_price_in_usd
 
-    def get_total_price_usd_for_template(self):
-        return get_price_sep(self.get_total_price_usd())
 
     def clear(self):
         """Removing cart from the session"""

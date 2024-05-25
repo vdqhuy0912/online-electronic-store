@@ -26,7 +26,7 @@ urlpatterns = [
     path('online-shop/cart/', include('Cart.urls')),
     path('online-shop/products/', include('Products.urls')),
     path('online-shop/orders/', include('Order.urls')),
-    path('paypal/', include('paypal.standard.ipn.urls')),
+#    path('paypal/', include('paypal.standard.ipn.urls')),
     path('online-shop/payment/', include('Payment.urls')),
     path('online-shop/customer/', include('Users.urls'))
 ]

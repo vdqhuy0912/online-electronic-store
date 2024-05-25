@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    My account
+    Tài khoản của tôi
 {% endblock %}
 
 {% block content %}
@@ -28,38 +28,34 @@
 
             <div class="col-md-4">
                 <div class="list-group list-group-flush" style="width: 80%">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        My cabinet
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">Coupons</a>
-                    <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action">My orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Favorites</a>
+                    <a href="#" class="list-group-item list-group-item-action">Kho voucher</a>
+                    <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action">Đơn hàng của tôi</a>
+                    <a href="#" class="list-group-item list-group-item-action">Yêu thích</a>
                     <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action active"
-                       aria-current="true">Personal
-                        information</a>
+                       aria-current="true">Thông tin cá nhân</a>
                 </div>
                 <a href="{% url 'logout' %}">
                     <img src="{% static 'icon/61208.png' %}" alt=""
                          style="width: 30px; margin-right: 5px; margin-left: 250px">
-                    Logout
+                    Thoát
                 </a>
             </div>
 
             <div class="col-md-8 personal-info">
-                <h1 class="pers-info-title" style="margin-bottom: 50px">Your personal information</h1>
+                <h1 class="pers-info-title" style="margin-bottom: 50px">Thông tin cá nhân của tôi</h1>
                 <div class="card-body">
                     <h3 class="card-title" style="margin-left: 100px">
-                        Personal information
+                        Thông tin cá nhân
                     </h3>
                     {% if user.name or user.last_name or user.surname %}
                         <h6 class="card-text"
                             style="margin-left: 100px; margin-top: 40px">
-                            Full name: {{ user.name }} {{ user.last_name }} {{ user.surname }}</h6>
+                            Tên đầy đủ: {{ user.name }} {{ user.last_name }} {{ user.surname }}</h6>
                     {% endif %}
 
                     {% if user.phone %}
                         <h6 class="card-text"
-                            style="margin-left: 100px; margin-top: 15px">Phone number: {{ user.phone }}</h6>
+                            style="margin-left: 100px; margin-top: 15px">Số điện thoại: {{ user.phone }}</h6>
                     {% endif %}
 
                     <h6 class="card-text"
@@ -69,15 +65,15 @@
                     <br>
                     <br>
                     <h3 class="card-title" style="margin-left: 100px">
-                        Shipping information
+                        Địa chỉ giao hàng
                     </h3>
                     {% if user.city %}
                         <h6 class="card-text"
                             style="margin-left: 100px; margin-top: 40px">
-                            City: {{ user.city }}</h6>
+                            Địa chỉ: {{ user.city }}</h6>
                     {% endif %}
                     <h6 class="card-text"
-                        style="margin-left: 100px; margin-top: 15px">Post office: {{ user.phone }}</h6>
+                        style="margin-left: 100px; margin-top: 15px">Số điện thoại: {{ user.phone }}</h6>
                     <h6 class="card-text"
                         style="margin-left: 100px; margin-top: 15px">Email: {{ user.email }}</h6>
 

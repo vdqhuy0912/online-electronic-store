@@ -27,32 +27,28 @@
 
             <div class="col-md-4">
                 <div class="list-group list-group-flush" style="width: 80%">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        My cabinet
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">Coupons</a>
+                    <a href="#" class="list-group-item list-group-item-action">Kho vouchers</a>
                     <a href="{% url 'user-orders' %}" class="list-group-item list-group-item-action active"
-                       aria-current="true">My orders</a>
-                    <a href="#" class="list-group-item list-group-item-action">Favorites</a>
-                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Personal
-                        information</a>
+                       aria-current="true">Giỏ hàng của tôi</a>
+                    <a href="#" class="list-group-item list-group-item-action">Yêu thích</a>
+                    <a href="{% url 'customer-account' %}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                 </div>
                 <a href="{% url 'logout' %}">
                     <img src="{% static 'icon/61208.png' %}" alt=""
                          style="width: 30px; margin-right: 5px; margin-left: 250px">
-                    Logout
+                    Đăng xuất
                 </a>
             </div>
 
             <div class="col-md-8 personal-info">
-                <h1 class="pers-info-title" style="margin-bottom: 50px">Change email</h1>
+                <h1 class="pers-info-title" style="margin-bottom: 50px">Đổi Email</h1>
                 <div class="card-body">
 
                     <form action="" method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
 
-                        <button type="submit" class="btn btn-dark">Change</button>
+                        <button type="submit" class="btn btn-dark">Đổi</button>
                     </form>
 
 
