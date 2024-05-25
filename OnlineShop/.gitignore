@@ -1,0 +1,13 @@
+venv
+.idea
+*.pyc
+ABOUT CART CREATION
+*.ini
+media
+*.env
+.vscode
+__pycache__
+celerybeat-schedule
+!/celerybeat-schedule.bak
+!/celerybeat-schedule.dat
+!/celerybeat-schedule.dir

@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: shop_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shop_db
+
+  shop-app:
+    build: .
+    restart: always
+    command: python /shop/app/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/shop/app
+    depends_on:
+      - db
+    ports:
+      - '8000:8000'
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  worker:
+    restart: always
+    build:
+      context: .
+    volumes:
+      - .:/shop/app
+    command: celery -A OnlineShop worker -l DEBUG
+    depends_on:
+      - db
+      - redis
+      - shop-app
+
+  celery-beats:
+    restart: always
+    build:
+      context: .
+    volumes:
+      - .:/shop/app
+    command: celery -A OnlineShop beat -l info
+    depends_on:
+      - db
+      - redis
+      - worker
+      - shop-app
+
+
+volumes:
+  postgres_data:
