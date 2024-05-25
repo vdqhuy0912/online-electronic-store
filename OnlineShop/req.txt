@@ -68,3 +68,4 @@ vine==5.0.0
 virtualenv==20.17.1
 virtualenv-clone==0.5.7
 wcwidth==0.2.5
+pickle

@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from .utils import ProductsSortMixin, ProductRelatedChoicesMixin, SearchMixin
 from .forms import ReviewsForms, OrderingChoicesForm
 from .models import *
+from ..recommendation_system.recommendation import recommend
 
 
 class Search(SearchMixin, ListView):
@@ -139,8 +140,7 @@ class ProductsDetailView(ProductRelatedChoicesMixin, DetailView):
         context['reviews'] = Reviews.objects.filter(product=product).only('name',
                                                                           'review',
                                                                           'rating')
-        context['recommended_products'] = Product.objects.all().order_by('?').select_related('main_category',
-                                                                                             'subcategory')
+        context['recommended_products'] = recommend(self.model.name)
         context['form'] = ReviewsForms()
         return context
 
